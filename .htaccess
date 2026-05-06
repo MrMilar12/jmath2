@@ -1,0 +1,9 @@
+Options -Indexes
+RewriteEngine On
+
+# Deny direct access to internal folders
+RewriteRule ^(app|config|sql)/ - [F,L]
+
+# Internally route all requests through public/ while keeping clean URLs
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]

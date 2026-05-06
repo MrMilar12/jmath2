@@ -1,0 +1,202 @@
+:root {
+  --sky-top: #9be6ff;
+  --sky-bottom: #fef8c8;
+  --grass: #81e291;
+  --ink: #264653;
+  --card: #fffef7;
+  --accent: #ff8fab;
+  --accent-2: #ffd166;
+  --accent-3: #7cd992;
+  --bubble-1: #ffcad4;
+  --bubble-2: #caffbf;
+  --bubble-3: #a0c4ff;
+  --bubble-4: #fdffb6;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Baloo 2", "Comic Sans MS", cursive;
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--sky-top) 0%, #b9f4ff 35%, var(--sky-bottom) 100%);
+}
+
+.clouds::before,
+.clouds::after {
+  content: "";
+  position: fixed;
+  width: 230px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 60px;
+  filter: blur(0.2px);
+  z-index: -1;
+}
+.clouds::before {
+  top: 8%;
+  left: -240px;
+  animation: drift 28s linear infinite;
+}
+.clouds::after {
+  top: 18%;
+  left: -300px;
+  animation: drift 35s linear infinite;
+}
+
+@keyframes drift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 520px)); }
+}
+
+.page-wrap {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.brand {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-weight: 800;
+  background: var(--card);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 0 #7fd4ef;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 16px;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  color: #17313f;
+  background: var(--accent-2);
+  box-shadow: 0 4px 0 #e6b13d;
+  transition: transform 0.15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn:active { transform: translateY(1px); }
+
+.hero {
+  background: linear-gradient(160deg, #ffffffcc, #fff4bdcc);
+  border-radius: 26px;
+  padding: 1.2rem;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 0 #97dff4;
+}
+.hero h1 {
+  margin: 0 0 0.3rem;
+  font-size: clamp(1.6rem, 5vw, 3rem);
+}
+.hero p { margin: 0.2rem 0 0; }
+
+.bubble-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  gap: 1rem;
+}
+
+.bubble {
+  position: relative;
+  border-radius: 999px;
+  min-height: 170px;
+  padding: 1rem;
+  text-decoration: none;
+  color: #123;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 4px solid #fff;
+  box-shadow: 0 8px 0 rgba(0, 0, 0, 0.08);
+  animation: bob 4s ease-in-out infinite;
+}
+
+.bubble span {
+  font-size: 0.95rem;
+  opacity: 0.82;
+}
+
+.bubble:nth-child(4n+1) { background: radial-gradient(circle at 30% 30%, #fff, var(--bubble-1)); }
+.bubble:nth-child(4n+2) { background: radial-gradient(circle at 30% 30%, #fff, var(--bubble-2)); animation-delay: .4s; }
+.bubble:nth-child(4n+3) { background: radial-gradient(circle at 30% 30%, #fff, var(--bubble-3)); animation-delay: .8s; }
+.bubble:nth-child(4n+4) { background: radial-gradient(circle at 30% 30%, #fff, var(--bubble-4)); animation-delay: .2s; }
+
+.bubble:hover { transform: scale(1.04); }
+.bubble:focus-visible {
+  outline: 4px dashed #ff7f50;
+  outline-offset: 2px;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.card {
+  margin-top: 1rem;
+  background: var(--card);
+  border-radius: 20px;
+  border: 3px solid #fff;
+  box-shadow: 0 8px 0 #b4eaf8;
+  padding: 1rem;
+}
+
+.question {
+  margin-bottom: 1rem;
+  background: #f1fbff;
+  border-radius: 14px;
+  border: 2px solid #d5f2fd;
+  padding: 0.85rem;
+}
+
+.options { display: grid; gap: 0.45rem; }
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #fff;
+  border-radius: 12px;
+  border: 2px solid #e7eef2;
+  padding: 0.4rem 0.5rem;
+}
+
+.footer-grass {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 26px;
+  background: repeating-linear-gradient(120deg, var(--grass), var(--grass) 16px, #93ec9f 16px, #93ec9f 30px);
+  border-top: 4px solid #68cc7a;
+  z-index: -1;
+}
+
+.notice {
+  padding: 0.7rem 0.9rem;
+  border-radius: 14px;
+  font-weight: 700;
+  background: #fff4ce;
+  border: 2px solid #ffd57a;
+}
+
+@media (max-width: 640px) {
+  .page-wrap { padding: 0.8rem 0.7rem 3rem; }
+  .bubble { min-height: 150px; }
+}
