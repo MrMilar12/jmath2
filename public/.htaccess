@@ -1,10 +1,6 @@
 Options -Indexes
 RewriteEngine On
-
-# Block direct access to hidden files except .well-known
 RewriteRule "(^|/)\.(?!well-known/)" - [F]
-
-# Route everything through index.php when file/folder does not exist
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]

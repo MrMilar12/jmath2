@@ -5,4 +5,5 @@ return [
     'db_name' => 'jmath2',
     'db_user' => 'root',
     'db_pass' => '',
+    'app_name' => 'JMath2 Interactive Module',
 ];
