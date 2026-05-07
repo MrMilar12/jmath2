@@ -42,8 +42,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             . "    'app_name' => 'JMath2 Interactive Module',\n"
             . "];\n";
 
-        file_put_contents(dirname(__DIR__) . '/config/config.php', $config, LOCK_EX);
-        $success = 'Install completed. You can now open the app.';
+        $configPath = dirname(__DIR__) . '/config/config.php';
+        if (!is_writable(dirname($configPath))) {
+            $error = 'Permission denied: the <strong>config/</strong> directory is not writable by the web server. '
+                . 'Run <code>chmod 777 ' . htmlspecialchars(dirname($configPath)) . '</code> in your terminal, then try again.';
+        } else {
+            $result = file_put_contents($configPath, $config, LOCK_EX);
+            if ($result === false) {
+                $error = 'Permission denied: could not write <strong>config/config.php</strong>. '
+                    . 'Run <code>chmod 777 ' . htmlspecialchars(dirname($configPath)) . '</code> and try again.';
+            } else {
+                $success = 'Install completed. You can now open the app.';
+            }
+        }
     } catch (Throwable $e) {
         $error = 'Install failed: ' . $e->getMessage();
     }
